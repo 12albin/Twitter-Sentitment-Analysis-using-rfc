@@ -1,0 +1,20 @@
+import streamlit as st
+import pickle
+import time
+
+st.title("twitter sentiment analysis")
+
+model=pickle.load(open('twitter_sentiment_model.pkl','rb'))
+
+tweet=st.text_input("enter your tweet")
+
+submit=st.button('predict')
+
+if submit:
+    start=time.time()
+    prediction=model.predict([tweet])
+    end=time.time()
+    st.write('prediction time taken:',round(end-start,2),'seconds')
+    #print(prediction[0])
+    st.write("prediction sentiment is :",prediction[0])
+
